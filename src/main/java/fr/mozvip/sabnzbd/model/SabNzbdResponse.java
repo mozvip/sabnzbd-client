@@ -5,6 +5,7 @@ import java.util.List;
 public class SabNzbdResponse {
 	
 	private SABHistoryResponse history;
+	private String error;
 	private boolean status;
 	private List<String> nzo_ids;
 	private List<Job> jobs;
@@ -45,4 +46,12 @@ public class SabNzbdResponse {
 	public void setQueue(Queue queue) {
 		this.queue = queue;
 	}
+	public String getError() {
+		return error;
+	}
+	public void setError(String error) {
+		this.error = error;
+	}
+	
+	
 }

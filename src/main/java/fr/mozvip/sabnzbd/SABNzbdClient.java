@@ -8,7 +8,6 @@ import fr.mozvip.sabnzbd.model.SabNzbdResponse;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
@@ -63,11 +62,15 @@ public class SABNzbdClient {
 	}
 
 	public SabNzbdResponse getQueueStatus() throws IOException {
-		return service.getQueueStatus(apiKey).execute().body();
+		SabNzbdResponse response = service.getQueueStatus(apiKey).execute().body();
+		checkError( response );
+		return response;
 	}
 
 	public SabNzbdResponse getQueue() throws IOException {
-		return service.getQueue(apiKey).execute().body();
+		SabNzbdResponse response = service.getQueue(apiKey).execute().body();
+		checkError( response );
+		return response;
 	}
 
 	public void delete(String nzo_id) {
@@ -81,17 +84,27 @@ public class SABNzbdClient {
 	public String addNZB(Path nzbFilePath) throws IOException {
 		RequestBody requestFile = RequestBody.create(MediaType.parse("application/x-nzb"), nzbFilePath.toFile());
 	    MultipartBody.Part body = MultipartBody.Part.createFormData("name", nzbFilePath.getFileName().toString(), requestFile);		
-		Response<SabNzbdResponse> response = service.addNZBByFileUpload(body, apiKey).execute();
-		SabNzbdResponse sr = response.body();
-		return sr.getNzo_ids().get(0);
+		SabNzbdResponse response = service.addNZBByFileUpload(body, apiKey).execute().body();
+		checkError( response );
+		return response.getNzo_ids().get(0);
 	}
 
 	public SABHistoryResponse getHistory() throws IOException {
-		return service.getHistory(apiKey).execute().body().getHistory();
+		SabNzbdResponse response = service.getHistory(apiKey).execute().body();
+		checkError(response);
+		return response.getHistory();
 	}
 
 	public String addNZB(String niceName, String nzbURL) throws IOException {
 		SabNzbdResponse response = service.addNZBByURL(nzbURL, niceName, apiKey).execute().body();
+		checkError(response);
 		return response.getNzo_ids().get(0);
+	}
+
+
+	private void checkError(SabNzbdResponse response) throws IOException {
+		if (response.getError() != null) {
+			throw new IOException( response.getError() );
+		}
 	}	
 }
