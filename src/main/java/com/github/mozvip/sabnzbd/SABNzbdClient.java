@@ -1,10 +1,11 @@
-package fr.mozvip.sabnzbd;
+package com.github.mozvip.sabnzbd;
 
 import java.io.IOException;
 import java.nio.file.Path;
 
-import fr.mozvip.sabnzbd.model.SABHistoryResponse;
-import fr.mozvip.sabnzbd.model.SabNzbdResponse;
+import com.github.mozvip.sabnzbd.model.SABHistoryResponse;
+import com.github.mozvip.sabnzbd.model.SabNzbdResponse;
+
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;

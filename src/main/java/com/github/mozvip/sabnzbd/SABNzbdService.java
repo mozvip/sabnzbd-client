@@ -1,6 +1,7 @@
-package fr.mozvip.sabnzbd;
+package com.github.mozvip.sabnzbd;
 
-import fr.mozvip.sabnzbd.model.SabNzbdResponse;
+import com.github.mozvip.sabnzbd.model.SabNzbdResponse;
+
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.GET;

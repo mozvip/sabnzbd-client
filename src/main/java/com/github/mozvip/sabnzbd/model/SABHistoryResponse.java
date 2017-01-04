@@ -1,4 +1,4 @@
-package fr.mozvip.sabnzbd.model;
+package com.github.mozvip.sabnzbd.model;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package fr.mozvip.sabnzbd.model;
+package com.github.mozvip.sabnzbd.model;
 
 public class Job {
 	

@@ -1,4 +1,4 @@
-package fr.mozvip.sabnzbd;
+package com.github.mozvip.sabnzbd;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -9,8 +9,10 @@ import java.nio.file.Paths;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import fr.mozvip.sabnzbd.model.SabNzbdResponse;
-import fr.mozvip.sabnzbd.model.SabNzbdResponseSlot;
+import com.github.mozvip.sabnzbd.SABNzbdClient;
+import com.github.mozvip.sabnzbd.model.SabNzbdResponse;
+import com.github.mozvip.sabnzbd.model.SabNzbdResponseSlot;
+
 import junit.framework.Assert;
 
 public class SABNzbdClientTest {
