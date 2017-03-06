@@ -3,16 +3,16 @@ jdk:
   - oraclejdk8
   - oraclejdk7
   - openjdk7
-sudo: false
+sudo: required
 install:
   - mvn --settings .travis/settings.xml install -DskipTests=true -Dgpg.skip -Dmaven.javadoc.skip=true -B -V
 before_install:
   - echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import --batch || true
   - echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust --batch || true
-  - apt-get -qq update
-  - apt-get install -y sabnzbdplus
-  - cat /etc/default/sabnzbdplus
-  - sed 's/USER=[USER]/USER=$USER/' /etc/default/sabnzbdplus > /etc/default/sabnzbdplus
+  - sudo apt-get -qq update
+  - sudo apt-get install -y sabnzbdplus
+  - sudo sed 's/USER=[USER]/USER=$USER/' /etc/default/sabnzbdplus > sabnzbdplus
+  - sudo cp sabnzbdplus /etc/default/sabnzbdplus
   - service sabnzbdplus start
 deploy:
   -
