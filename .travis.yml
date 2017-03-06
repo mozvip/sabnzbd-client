@@ -11,11 +11,12 @@ before_install:
   - echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust --batch || true
   - sudo apt-get -qq update
   - sudo apt-get install -y sabnzbdplus
+  - sudo cat /etc/default/sabnzbdplus
   - sudo sed "s/USER=[USER]/USER=$USER/" /etc/default/sabnzbdplus > sabnzbdplus
-  - sudo sed "s/HOST=/HOST=0.0.0.0/" sabnzbdplus > sabnzbdplus
-  - sudo sed "s/PORT=/PORT=8080/" sabnzbdplus > sabnzbdplus
+  - sudo sed 's/HOST=/HOST=0.0.0.0/' sabnzbdplus > sabnzbdplus
+  - sudo sed 's/PORT=/PORT=8080/' sabnzbdplus > sabnzbdplus
+  - sudo cat sabnzbdplus
   - sudo cp sabnzbdplus /etc/default/sabnzbdplus
-  - cat /etc/default/sabnzbdplus
   - service sabnzbdplus start
 deploy:
   -
